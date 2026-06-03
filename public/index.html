@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SACTS</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="app">
+    <section id="authScreen" class="auth-screen" aria-labelledby="authTitle">
+      <div class="brand-panel">
+        <span class="badge">SACTS</span>
+        <h1>Sistema de Agendamento e Controle de Transporte Sanitário</h1>
+        <p>Gerencie pacientes, motoristas, veículos e viagens em uma plataforma simples e responsiva.</p>
+        <div class="demo-box">
+          <strong>Login demo</strong>
+          <span>demo@sacts.com</span>
+          <span>123456</span>
+        </div>
+      </div>
+
+      <section class="auth-card" aria-label="Autenticação">
+        <h2 id="authTitle">Entrar</h2>
+        <p id="authSubtitle">Acesse sua conta para continuar</p>
+
+        <form id="authForm" novalidate>
+          <label id="nameGroup" class="field hidden">
+            <span>Nome</span>
+            <input id="nameInput" type="text" autocomplete="name" placeholder="Seu nome">
+          </label>
+
+          <label class="field">
+            <span>E-mail</span>
+            <input id="emailInput" type="email" autocomplete="email" placeholder="email@exemplo.com" required>
+          </label>
+
+          <label class="field">
+            <span>Senha</span>
+            <input id="passwordInput" type="password" autocomplete="current-password" placeholder="Mínimo 6 caracteres" required>
+          </label>
+
+          <button id="authButton" class="primary-btn" type="submit">Entrar</button>
+        </form>
+
+        <button id="toggleAuth" class="link-btn" type="button">Criar nova conta</button>
+      </section>
+    </section>
+
+    <section id="dashboard" class="dashboard hidden" aria-label="Painel SACTS">
+      <header class="topbar">
+        <div>
+          <span class="badge">SACTS</span>
+          <h1>Controle de Transporte Sanitário</h1>
+        </div>
+        <div class="user-area">
+          <span id="userName"></span>
+          <button id="seedButton" class="secondary-btn" type="button">Dados demo</button>
+          <button id="logoutButton" class="danger-btn" type="button">Sair</button>
+        </div>
+      </header>
+
+      <nav class="tabs" aria-label="Módulos do sistema">
+        <button class="tab active" data-resource="appointments" type="button">Agendamentos</button>
+        <button class="tab" data-resource="patients" type="button">Pacientes</button>
+        <button class="tab" data-resource="drivers" type="button">Motoristas</button>
+        <button class="tab" data-resource="vehicles" type="button">Veículos</button>
+        <button class="tab" data-resource="reports" type="button">Relatórios</button>
+      </nav>
+
+      <!-- Visualização de CRUD (agendamentos, pacientes, motoristas, veículos) -->
+      <section id="crudView" class="content-grid">
+        <article class="panel form-panel">
+          <div class="panel-header">
+            <h2 id="formTitle">Novo registro</h2>
+            <button id="cancelEdit" class="link-btn hidden" type="button">Cancelar edição</button>
+          </div>
+          <form id="resourceForm" class="resource-form" novalidate></form>
+        </article>
+
+        <article class="panel list-panel">
+          <div class="panel-header">
+            <div>
+              <h2 id="listTitle">Registros</h2>
+              <p id="listSubtitle">Gerencie os dados cadastrados</p>
+            </div>
+            <label class="search-field">
+              <span>Buscar</span>
+              <input id="searchInput" type="search" placeholder="Digite para filtrar">
+            </label>
+          </div>
+          <div id="records" class="records" aria-live="polite"></div>
+        </article>
+      </section>
+
+      <!-- Visualização de Relatórios — só aparece quando a aba "Relatórios" é selecionada -->
+      <section id="reportsView" class="reports-view hidden" aria-label="Indicadores e relatórios">
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <h2>Indicadores de desempenho</h2>
+              <p>Visão geral das viagens, pacientes e uso da frota.</p>
+            </div>
+            <button id="reloadReports" class="secondary-btn" type="button">Atualizar</button>
+          </div>
+
+          <div id="metricGrid" class="metric-grid" aria-live="polite"></div>
+
+          <h3 class="reports-subtitle">Viagens por status</h3>
+          <div id="statusChart" class="bar-chart" aria-live="polite"></div>
+
+          <div class="reports-grid">
+            <div>
+              <h3 class="reports-subtitle">Motoristas mais ativos</h3>
+              <div id="driversChart" class="bar-chart" aria-live="polite"></div>
+            </div>
+            <div>
+              <h3 class="reports-subtitle">Uso da frota (veículos)</h3>
+              <div id="vehiclesChart" class="bar-chart" aria-live="polite"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+    <div id="loader" class="loader hidden" aria-label="Carregando"></div>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>
